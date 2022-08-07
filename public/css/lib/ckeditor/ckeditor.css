@@ -1,0 +1,14 @@
+.ck *{
+    color: white !important;
+    background: #303049 !important;
+    background-color: #303049 !important;
+    border-color: #303049 !important;
+}
+
+
+.ck-content {
+    min-height: 200px;
+
+    max-height: 500px;
+    overflow: auto;
+}
