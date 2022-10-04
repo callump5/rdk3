@@ -13,6 +13,19 @@ class Category extends Model
         'name'
     ];
 
+
+    public function scopeIndex($query)
+    {
+        return $query;
+    }
+
+    public function scopeSearchTitle($query, $searchTerm)
+    {
+        return $query->where("name", 'LIKE', "%{$searchTerm}%");
+    }
+
+    
+
     public function games()
     {
         return $this->belongsToMany(Game::class);

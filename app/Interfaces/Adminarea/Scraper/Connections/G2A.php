@@ -41,6 +41,18 @@ class G2A implements ScraperInterface
         $this->_scopedItemData = $this->_cleanedPageData->data->items[0];
     }
 
+    // Cycle through category page and build a list of products to scrape
+    public function buildList() : void
+    {
+
+    }
+
+    // Get the first result
+    public function getFirstResult() : void
+    {
+
+    }
+
 
     // -- Self explanatory functions --------------------------/
 

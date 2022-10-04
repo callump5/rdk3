@@ -14,6 +14,12 @@ interface ScraperInterface
     // Search the html with the passed classes
     public function cleanPageData($page) : void;
 
+    // Cycle through category page and build a list of products to scrape
+    public function buildList() : void;
+
+    // Get the first result
+    public function getFirstResult() : void;
+
 
     // -- Self explanatory functions --------------------------/
 

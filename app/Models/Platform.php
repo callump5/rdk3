@@ -18,6 +18,11 @@ class Platform extends Model
         return $query;
     }
 
+    public function scopeSearchTitle($query, $searchTerm)
+    {
+        return $query->where("name", 'LIKE', "%{$searchTerm}%");
+    }
+
     public function games()
     {
         return $this->belongsToMany(Game::class);

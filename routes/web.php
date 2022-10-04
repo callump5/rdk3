@@ -1,9 +1,14 @@
 <?php
 
-use App\Http\Controllers\Adminarea\DashboardController;
-use App\Http\Controllers\Adminarea\ScraperController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Adminarea\DashboardController;
+use App\Http\Controllers\Adminarea\ScraperController;
+
+use App\Models\Adminarea\Scraper\CurlSession;
+use App\Models\Adminarea\Scraper\Scraper;
+
+use App\Jobs\ScrapeProduct;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,3 +39,33 @@ Route::prefix('admin')->group(function() {
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/test', function() {
+
+//     // Init Curl Session
+//     $curlSession = new CurlSession();
+
+//     // Init Scraper and pass CurlSession as Dependency
+//     $scraper = new Scraper($curlSession);
+
+//     // Set the interface for the scraper
+//     $scraper->setInterface('cdkeys');
+// //    $scraper->setInterface('g2a');
+
+//     // Scrape Product
+//     $scraper->searchProduct();
+// //    $scraper->scrapeProduct('https://www.g2a.com/search/api/v3/suggestions?include[]=categories&itemsPerPage=4&phrase=Sniper Elite 5&currency=GBP');
+
+
+
+    $data = [
+        "name" => 'testGame',
+        "href" => 'https://www.cdkeys.com/pc/fifa-23-pc-en-origin',
+        "platform" => 'PC',
+        "category" => 'Sports',
+        "collection" => 'Fifa'
+    ];
+
+    ScrapeProduct::dispatch($data);
+
+});

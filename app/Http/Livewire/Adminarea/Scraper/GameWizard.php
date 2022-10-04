@@ -73,9 +73,10 @@ class GameWizard extends Component
 
     public function scrapeProduct()
     {
+        // Check to see if the game exists
         $game = Game::where('cdkeys_link', $this->url)->get();
 
-
+        // If the game exists throw an error message
         if(count($game) > 0){
             $this->dispatchBrowserEvent('scraperError', [
                 'type' => 'error',
@@ -84,34 +85,23 @@ class GameWizard extends Component
             return;
         }
 
-
         // Init Curl Session
         $curlSession = new CurlSession();
 
         // Init Scraper and pass CurlSession as Dependency
         $scraper = new Scraper($curlSession);
 
+        // Loop through selected drivers
         foreach($this->drivers as $driver)
         {
             // Set the interface for the scraper
             $scraper->setInterface($driver);
 
-            if($driver === 'g2a'){
-                if(isset($this->scrapedData['name']) && $this->scrapedData['name'] !== ''){
-                    $name = str_replace('(WW)', '', $this->scrapedData['name']);
-                    $pageUrl = "https://www.g2a.com/search/api/v3/suggestions?include[]=categories&itemsPerPage=4&phrase={$name}&currency=GBP";
-                } else {
-                    $pageUrl = "https://www.g2a.com/search/api/v3/suggestions?include[]=categories&itemsPerPage=4&phrase={$this->url}&currency=GBP";
-                }
-            } else {
-                $pageUrl = $this->url;
-            }
+            $product = $scraper->loadProduct($this->url, $this->scrapedData['name']);
 
-            $this->product[$driver . '_url'] = $pageUrl;
+            $productData = $scraper->scrapeProduct($product);
 
-            $productData = $scraper->scrapeProduct($pageUrl);
-
-            if(isset($productData['type']) &&$productData['type'] === 'error'){
+            if(isset($productData['type']) && $productData['type'] === 'error'){
                 $this->dispatchBrowserEvent('scraperError', [
                     'type' => $productData['type'],
                     'message' => $productData['message'],
@@ -120,6 +110,7 @@ class GameWizard extends Component
             }
 
 
+            $this->product[$driver . '_url'] = $product;
             // Scrape Product
 
             // Map the data
@@ -175,6 +166,18 @@ class GameWizard extends Component
             return;
         }
 
+        $g2a_game = Game::where('g2a_link', $this->scrapedData['g2a_link'])->get();
+        $cd_game = Game::where('cdkeys_link', $this->scrapedData['cdkeys_link'])->get();
+        // If the game exists throw an error message
+        if(count($cd_game) > 0 || count($g2a_game) > 0){
+            $this->dispatchBrowserEvent('scraperError', [
+                'type' => 'error',
+                'message' => 'This game already exists!'
+            ]);
+            return;
+        }
+        
+
         $this->game = Game::updateOrCreate(
             [$this->drivers[0] . '_link' => $this->scrapedData[$this->drivers[0] . '_link']],
             [
@@ -192,8 +195,9 @@ class GameWizard extends Component
 
         $this->game->image_path = $this->scrapedData['image_path'];
         $this->game->save();
-
         $this->nextStep();
+
+
 
     }
 

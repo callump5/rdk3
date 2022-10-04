@@ -19,7 +19,7 @@
 
         <div class="text-end flex">
 
-            <button class="flex block w-full py-1.5 pl-4 pr-4  leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input">
+            <button wire:click="queueProductUpdates" class="flex block w-full py-1.5 pl-4 pr-4  leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input">
                 Queue
                 <span class="pl-2">
                     <x-adminarea.partials.fa-icon icon="browser"></x-adminarea.partials.fa-icon>
@@ -33,7 +33,7 @@
                 </span>
             </a>
 
-            <a href="/admin/scraper/category" class="flex block w-full py-1.5 pl-4 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input">
+            <a href="/admin/scraper/categories" class="flex block w-full py-1.5 pl-4 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input">
                 Categories
                 <span class="pl-2">
                     <x-adminarea.partials.fa-icon icon="list-tree"></x-adminarea.partials.fa-icon>

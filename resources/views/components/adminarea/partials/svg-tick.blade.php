@@ -1,4 +1,4 @@
-<svg wire:click="addToUpdateList({{ $id, $name }})" width="20" height="20" fill="currentColor"
+<svg wire:click="addToUpdateList('{{ $id }}')" width="20" height="20" fill="currentColor"
      class="mx-4 transition text-gray-400 ease-in
          @if(isset($this->updateList[$id]))
          dark:text-green-300

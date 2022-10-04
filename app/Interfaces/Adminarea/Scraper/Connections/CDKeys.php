@@ -15,6 +15,7 @@ class CDKeys implements ScraperInterface
     private $_pageData;
     private $_dom;
     private $_finder;
+    public $cleanedDate;
 
     // Set Page Data
     public function setPageData($data): void
@@ -35,8 +36,21 @@ class CDKeys implements ScraperInterface
         libxml_use_internal_errors(true);
         $this->_dom->loadHTML($page, LIBXML_NOWARNING );
         $this->_finder = new DomXPath($this->_dom);
+        $this->cleanedData = $this->_finder;
     }
 
+
+    // Cycle through category page and build a list of products to scrape
+    public function buildList() : void
+    {
+
+    }
+
+    // Get the first result
+    public function getFirstResult() : void
+    {
+
+    }
 
     // -- Self explanatory functions --------------------------/
 

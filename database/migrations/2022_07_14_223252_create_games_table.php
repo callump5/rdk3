@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('cdkeys_link')->unique()->nullable();
             $table->float('g2a_price', 8, 2)->nullable();
             $table->string('g2a_link')->unique()->nullable();
+            $table->longText('g2a_search_link')->nullable();
         });
     }
 

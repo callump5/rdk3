@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Adminarea\Scraper;
 
 use App\Models\Game;
+use App\Jobs\UpdateProductPrices;
 use Livewire\Component;
+
 
 class Overview extends Component
 {
@@ -19,6 +21,19 @@ class Overview extends Component
             unset($this->updateList[$id]);
         } else {
             $this->updateList[$id] = $id;
+        }
+    }
+
+    public function queueProductUpdates(){
+
+        foreach($this->updateList as $product_id){
+
+            $data = [
+                "product_id" => $product_id,
+            ];
+            
+            UpdateProductPrices::dispatch($data);
+    
         }
     }
 
