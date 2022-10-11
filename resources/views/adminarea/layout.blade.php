@@ -22,17 +22,46 @@
 </head>
 <body class="h-screen">
 
-    <main class="bg-gray-100 dark:bg-gray-800 h-screen overflow-hidden relative">
+    <main class="bg-zinc-800 h-screen overflow-hidden relative">
         <div class="flex items-start justify-between">
 
             <x-adminarea.navigation></x-adminarea.navigation>
 
-            <div class="flex flex-col w-full pl-0 md:p-4 md:space-y-4">
-                <x-adminarea.partials.header-bar></x-adminarea.partials.header-bar>
+            <div class="flex flex-col w-full md:space-y-4">
+                {{-- <x-adminarea.partials.header-bar></x-adminarea.partials.header-bar --}}
 
-                <div class="overflow-auto h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
+                <div class="overflow-auto h-screen p-10">
                     <div class="flex flex-col flex-wrap sm:flex-row ">
-                        @yield('content')
+
+                        <div class="text-white w-[100%] p-5">
+                            <div class="flex items-center pl-5 mb-10">
+                                <!-- begin::Card Headers -->
+                                <div class="w-[75%]">
+                                    <h1 class="text-3xl leading-tight mb-3">{{$title}}</h1>
+
+                                    @isset($description)
+                                        <p class="opacity-80 text-sm">{{$description}}
+                                        </p>
+                                    @endisset
+                                </div>
+                                <!-- end::Card Header -->
+
+                                <!-- begin::Card Actions -->
+                                <div class="actions w-[60%] flex justify-end" >
+
+                                    @stack('actions')
+                                    @isset($actions)
+                                        @foreach ($actions as $action)
+                                            <x-adminarea.partials.pill-button text="{{ $action['text'] }}" icon="{{ $action['icon'] }}" route="{{ $action['route'] ?? 'javascript' }}" ></x-adminarea.partials.pill-button>
+                                        @endforeach
+                                    @endisset
+                                </div>
+                                <!-- end::Card Actions -->
+                            </div>
+                            
+                            @yield('content')
+
+                        </div>
                     </div>
                 </div>
 

@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Adminarea\Scraper;
 
 use App\Models\Game;
 use App\Jobs\UpdateProductPrices;
-use Livewire\Component;
+use App\Http\Livewire\Adminarea\Overview as BaseOverview;
 
 
-class Overview extends Component
+class Overview extends BaseOverview
 {
 
     public $search = [];

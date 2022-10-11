@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Adminarea\DashboardController;
 use App\Http\Controllers\Adminarea\ScraperController;
-
+use App\Http\Controllers\GameController;
 use App\Models\Adminarea\Scraper\CurlSession;
 use App\Models\Adminarea\Scraper\Scraper;
 
@@ -34,6 +34,9 @@ Route::prefix('admin')->group(function() {
         Route::get('/games', [ScraperController::class, 'games'])->name('adminarea.scraper.games');
         Route::get('/categories', [ScraperController::class, 'categories'])->name('adminarea.scraper.categories');
     });
+
+
+    Route::resource('games', GameController::class);
 
 });
 

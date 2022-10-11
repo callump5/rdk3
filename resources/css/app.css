@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 
+input:focus-visible {
+    outline: none !important;
+}
 .swal2-popup {
     background-color: #1f2937 !important;
     color: #fff !important;
@@ -13,4 +16,23 @@
 .rdk-autocomplete input:focus+ul,
 ul:hover {
     display: block;
+}
+
+:root {
+    --fa-primary-color: #F0AF01 !important;
+    --fa-secondary-color: #F0AF01 !important;
+
+    --rdk-pc: #27272A;
+    --rdk-sc: #3F3F46;
+
+}
+
+.rdk-pc {
+    background-color: var(--rdk-pc);
+
+}
+
+.rdk-sc {
+    background-color: var(--rdk-sc);
+
 }
