@@ -31,6 +31,14 @@ class GameController extends Controller
     {
 
         $args = [
+            'title' => 'Editing ' . $game->name,
+            'actions' => [
+                [
+                    'text' => 'Create',
+                    'icon' => 'plus',
+                    'route' => route('games.create')
+                ]
+            ],
             'game' => $game
         ];
 
